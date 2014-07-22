@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+- 2.1.1
+env:
+- DB=postgresql
+script:
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rake
+before_script:
+- cp config/database.yml.sample config/database.yml
+- psql -c 'create database timetracker' -U postgres
+deploy:
+  provider: heroku
+  api_key: 007a1171c063f913cce8236a3974d4d197b2edd4
