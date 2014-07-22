@@ -13,4 +13,3 @@ before_script:
 deploy:
   provider: heroku
   api_key: 007a1171c063f913cce8236a3974d4d197b2edd4
-  
