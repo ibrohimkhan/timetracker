@@ -65,3 +65,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
+gem 'rails_12factor', group: :production
