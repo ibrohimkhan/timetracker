@@ -21,8 +21,8 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-  username: vagrant
-  password: vagrant
+  #username: vagrant
+  #password: vagrant
 
 development:
   <<: *default
@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: timetracker_production
-  username: timetracker
-  password: <%= ENV['TIMETRACKER_DATABASE_PASSWORD'] %>
+  #username: timetracker
+  #password: <%= ENV['TIMETRACKER_DATABASE_PASSWORD'] %>
