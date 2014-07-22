@@ -1,5 +1,16 @@
 source 'https://rubygems.org'
 
+gem "twitter-bootstrap-rails"
+
+#Authentication
+gem 'devise'
+
+#Authorization
+gem 'cancancan', '~> 1.7'
+
+#Simple form
+gem 'simple_form'
+gem "nested_form"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
@@ -23,21 +34,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin]
-
 group :development, :test do
   gem 'pry-rails'
   gem 'pry'
@@ -54,3 +50,18 @@ group :test do
   gem 'shoulda-matchers'
   gem 'webmock'
 end
+
+# Use ActiveModel has_secure_password
+# gem 'bcrypt', '~> 3.1.7'
+
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Use Capistrano for deployment
+# gem 'capistrano-rails', group: :development
+
+# Use debugger
+# gem 'debugger', group: [:development, :test]
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin]
