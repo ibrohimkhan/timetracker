@@ -9,7 +9,8 @@ script:
 - bundle exec rake
 before_script:
 - cp config/database.yml.sample config/database.yml
-- psql -c 'create database timetracker' -U postgres
+- psql -c 'create database timetracker_test' -U postgres
 deploy:
   provider: heroku
   api_key: 007a1171c063f913cce8236a3974d4d197b2edd4
+  app: morning-reef-2929

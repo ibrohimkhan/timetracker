@@ -16,23 +16,18 @@
 #
 default: &default
   adapter: postgresql
-  encoding: unicode
-  database: timetracker
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: 5
-  username: vagrant
-  password: vagrant
+  username: postgres
+  password:
+  host: localhost
 
 development:
   <<: *default
-  database: timetracker
+  database: timetracker_dev
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: timetracker
 
   # The password associated with the postgres role (username).
   #password:
@@ -84,5 +79,3 @@ test:
 production:
   <<: *default
   database: timetracker_production
-  username: timetracker
-  password: <%= ENV['TIMETRACKER_DATABASE_PASSWORD'] %>
