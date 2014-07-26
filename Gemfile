@@ -45,7 +45,7 @@ end
 
 group :test do
   gem 'rspec-rails'
-  gem 'spork'
+  gem 'spork-rails'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'webmock'
