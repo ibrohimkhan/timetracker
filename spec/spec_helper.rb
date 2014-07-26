@@ -27,7 +27,7 @@ Spork.prefork do
     end
 
     config.before(:each) do
-      DatabaseCleaner.strategy = example.metadata[:type] == :feature ? :deletion : :transaction
+      DatabaseCleaner.strategy = :transaction
       DatabaseCleaner.start
     end
 
