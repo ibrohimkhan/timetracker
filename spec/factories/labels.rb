@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :label do
-    name "MyString"
+    name { Faker::Hacker.noun }
   end
 end

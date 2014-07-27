@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :tag do
-    task nil
-    label nil
+    association :task
+    association :label
   end
 end

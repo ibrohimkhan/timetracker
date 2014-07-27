@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :schedule do
-    task nil
-    start_date "2014-07-27"
+    association :task
+    start_date "2014-07-20"
     end_date "2014-07-27"
   end
 end
