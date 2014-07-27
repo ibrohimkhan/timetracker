@@ -27,4 +27,4 @@ NOTES
 
 DEPLOYED
 
-- http://morning-reef-2929.herokuapp.com/
+- http://morning-reef-2929.herokuapp.com
