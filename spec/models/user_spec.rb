@@ -5,6 +5,7 @@ describe User do
     expect(FactoryGirl.build(:user)).to be_valid
   end
 
-  it { is_expected.to have_many(:tasks).with_through(:assignments) }
+  it { is_expected.to have_many(:tasks).through(:assignments) }
+  it { is_expected.to have_many(:assignments) }
 end
 
