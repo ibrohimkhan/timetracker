@@ -18,7 +18,8 @@ module Timetracker
     SimpleForm.browser_validations = false
 
     config.generators do |g|
-      g.test_framework :rspec, :view_spec => false,
+      g.test_framework :rspec,
+                       :view_spec => false,
                        :fixture => true,
                        :fixture_replacement => 'factory_girl'
 
