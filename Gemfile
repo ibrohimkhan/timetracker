@@ -40,7 +40,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'pry-remote'
   gem 'factory_girl_rails'
-  gem 'faker', '~> 1.2.0'
+  gem 'faker'
 end
 
 group :test do

@@ -1,5 +1,10 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe Assignment, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Assignment do
+  it "has a valid factory" do
+    expect(FactoryGirl.build(:assignment)).to be_valid
+  end
+
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:task) }
 end
