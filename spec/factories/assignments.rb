@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :assignment do
-    user nil
-    task nil
+    association :user
+    association :task
   end
 end

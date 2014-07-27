@@ -1,5 +1,11 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe Label, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Label do
+  it "has a valid factory" do
+    expect(FactoryGirl.build(:label)).to be_valid
+  end
+
+  it { is_expected.to have_many(:tags) }
+  it { is_expected.to have_many(:tasks).through(:tags) }
+
 end

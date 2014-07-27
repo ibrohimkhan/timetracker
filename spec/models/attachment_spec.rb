@@ -1,5 +1,9 @@
-require 'rails_helper'
+require 'spec_helper'
 
-RSpec.describe Attachment, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Attachment do
+  it "has a valid factory" do
+    expect(FactoryGirl.build(:attachment)).to be_valid
+  end
+
+  it { is_expected.to belong_to(:task) }
 end

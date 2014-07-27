@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :task do
-    name "MyString"
-    description "MyText"
-    parent_id 1
+    name { Faker::Name.title }
+    description { Faker::Hacker.say_something_smart }
+    parent_id { Faker::Number.digit }
     state false
   end
 end

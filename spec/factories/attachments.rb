@@ -2,8 +2,7 @@
 
 FactoryGirl.define do
   factory :attachment do
-    task ""
-    name "MyString"
-    file_path "MyString"
+    association :task
+    file_path { Faker::Internet.url }
   end
 end
