@@ -69,3 +69,6 @@ gem 'rails_12factor', group: :production
 
 # File Uploader
 gem 'carrierwave'
+
+# Annotate ActiveRecord models as a gem
+gem 'annotate', github: 'ctran/annotate_models'

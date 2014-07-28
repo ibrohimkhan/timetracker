@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)      not null
+#  description :text
+#  parent_id   :integer          default(0)
+#  state       :boolean          default(FALSE)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Task < ActiveRecord::Base
   has_many :assignments
   has_many :users, through: :assignments

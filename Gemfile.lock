@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: 9634ea6e67851d4a9a4d0b89597a6a9d3fc4d1f4
+  specs:
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -203,6 +211,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  annotate!
   cancancan (~> 1.7)
   carrierwave
   coffee-rails (~> 4.0.0)
