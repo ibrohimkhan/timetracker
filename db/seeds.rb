@@ -7,11 +7,13 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-5.times do |i|
-  User.create([{
-  	first_name: "FirstName#{i}",
-  	last_name:  "LastName#{i}",
-  	email:      "email#{i}@mail.com",
-  	password:   "pass"
-  }])
+unless User.any?
+  5.times do |i|
+	  User.create([{
+	  	first_name: "FirstName#{i}",
+	  	last_name:  "LastName#{i}",
+	  	email:      "email#{i}@mail.com",
+	  	password:   "pass"
+	  }])
+	end
 end
