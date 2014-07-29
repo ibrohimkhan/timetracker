@@ -31,9 +31,9 @@ html lang="en"
           a.brand href="#"Timetracker
           .container-fluid.nav-collapse
             ul.nav
-              li= link_to "Link 1", "/path1"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
+              li= link_to "Link 1", "/#"
+              li= link_to "Link 2", "/#"
+              li= link_to "Link 3", "/#"
               - if user_signed_in?
                   li= link_to "Logout", destroy_user_session_path, :method => 'delete'
                   li= link_to "Edit", edit_user_registration_path, :method => 'get'
@@ -45,9 +45,9 @@ html lang="en"
           .well.sidebar-nav
             ul.nav.nav-list
               li.nav-header Sidebar
-              li= link_to "Link 1", "/path1"
-              li= link_to "Link 2", "/path2"
-              li= link_to "Link 3", "/path3"
+              li= link_to "Link 1", "/#"
+              li= link_to "Link 2", "/#"
+              li= link_to "Link 3", "/#"
         .span9
           = bootstrap_flash
           = yield
