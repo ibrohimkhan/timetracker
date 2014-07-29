@@ -72,3 +72,9 @@ gem 'carrierwave'
 
 # Annotate ActiveRecord models as a gem
 gem 'annotate', github: 'ctran/annotate_models'
+
+# Slim templates generator for Rails 3 and 4
+gem 'slim-rails'
+
+# Devise localized view
+gem 'devise-i18n-views'
