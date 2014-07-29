@@ -25,4 +25,6 @@ NOTES
 - Memo pad 
 - List of selected notes
 
+DEPLOYED
 
+- http://morning-reef-2929.herokuapp.com

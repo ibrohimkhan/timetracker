@@ -40,12 +40,12 @@ group :development, :test do
   gem 'pry-nav'
   gem 'pry-remote'
   gem 'factory_girl_rails'
-  gem 'faker', '~> 1.2.0'
+  gem 'faker'
 end
 
 group :test do
   gem 'rspec-rails'
-  gem 'spork'
+  gem 'spork-rails'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'webmock'
@@ -66,3 +66,9 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'rails_12factor', group: :production
+
+# File Uploader
+gem 'carrierwave'
+
+# Annotate ActiveRecord models as a gem
+gem 'annotate', github: 'ctran/annotate_models'
