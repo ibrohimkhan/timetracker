@@ -4,9 +4,9 @@ section#header.dark
     h1 Welcome to Timetraker
     p
       ' A free very beautiful task manager
-      a href="#" Sign in
+      = link_to 'Sing in', new_user_session_path
   footer
-    a href="#" class="button" Registration
+    = link_to 'Registration', new_user_registration_path
 
 /! First
 section#first.main
@@ -14,10 +14,3 @@ section#first.main
     div.container
       h2 Tessellate is a free responsive site template
       p Gravida dis placerat lectus ante vel nunc euismod eget ornare varius gravida euismod lorem ipsum dolor sit amet consequat feugiat. Gravida dis placerat lectus ante vel nunc euismod eget ornare varius gravida euismod lorem ipsum dolor sit amet.
-
-div.container
-  div.row
-    div.col-md-3
-      p row 3
-    div.col-md-3
-      p row 3
