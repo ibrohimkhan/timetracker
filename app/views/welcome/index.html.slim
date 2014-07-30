@@ -1,16 +1,17 @@
-/! Header
-section#header.dark
-  header
-    h1 Welcome to Timetraker
-    p
-      ' A free very beautiful task manager
-      = link_to 'Sing in', new_user_session_path
-  footer
-    = link_to 'Registration', new_user_registration_path
+div#welcome
+  /! Header
+  section#header.dark
+    header
+      h1 Welcome to Timetraker
+      p
+        ' A free very beautiful task manager
+        = link_to 'Sing in', new_user_session_path
+    footer
+      = link_to 'Registration', new_user_registration_path, {class: 'button btn-registration'}
 
-/! First
-section#first.main
-  header
-    div.container
-      h2 Tessellate is a free responsive site template
-      p Gravida dis placerat lectus ante vel nunc euismod eget ornare varius gravida euismod lorem ipsum dolor sit amet consequat feugiat. Gravida dis placerat lectus ante vel nunc euismod eget ornare varius gravida euismod lorem ipsum dolor sit amet.
+  /! First
+  section#first.main
+    header
+      div.container
+        h2 Tessellate is a free responsive site template
+        p Gravida dis placerat lectus ante vel nunc euismod eget ornare varius gravida euismod lorem ipsum dolor sit amet consequat feugiat. Gravida dis placerat lectus ante vel nunc euismod eget ornare varius gravida euismod lorem ipsum dolor sit amet.
