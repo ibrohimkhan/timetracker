@@ -15,5 +15,5 @@ deploy:
   api_key: 007a1171c063f913cce8236a3974d4d197b2edd4
   app: morning-reef-2929
   on:
-      branch: view
+      all_branches: true
   run: "rake db:migrate"
