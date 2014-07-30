@@ -7,7 +7,12 @@ div#welcome
         ' A free very beautiful task manager
         = link_to 'Sing in', new_user_session_path
     footer
-      = link_to 'Registration', new_user_registration_path, {class: 'button btn-registration'}
+      - if user_signed_in?
+        = link_to 'Sign out', destroy_user_session_path, :method => :delete
+      - else
+        = link_to 'Registration', new_user_registration_path, class: 'button btn-registration'
+
+
 
   /! First
   section#first.main
