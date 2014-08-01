@@ -1,0 +1,27 @@
+.auth.auth-registration
+  .container
+    .row
+      .col-md-6
+        h1 Timetraker
+        p about project
+      .col-md-6
+        .well.bs-component
+          = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => 'form-horizontal' }) do |f|
+            = f.error_notification
+            fieldset
+              legend Registration
+              .form-group
+                label.col-lg-2.control-label for="email"  Email
+                .col-lg-10
+                  = f.input :email, :input_class => 'form-control', required: true, autofocus: true, label: false
+              .form-group
+                label.col-lg-2.control-label for="password"  Password
+                .col-lg-10
+                  = f.input :password, required: false, label: false
+              .form-group
+                label.col-lg-2.control-label for="password_confirmation"  Password confirmation
+                .col-lg-10
+                  = f.input :password_confirmation, required: true, label: false
+              .form-group
+                .col-lg-10.col-lg-offset-2
+                  = f.button :submit, 'Registration', class: 'btn-primary'
