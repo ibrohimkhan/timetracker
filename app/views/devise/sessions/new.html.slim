@@ -1,0 +1,24 @@
+.auth.auth-signin
+  .container
+    .row
+      .col-md-6
+        h1 Timetraker
+        p about project
+      .col-md-6
+        .well.bs-component
+          = simple_form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'form-horizontal' }) do |f|
+            fieldset
+              legend Sign in
+              .form-group
+                label.col-lg-2.control-label for="email"  Email
+                .col-lg-10
+                  = f.input :email, :input_class => 'form-control', required: true, autofocus: true, label: false
+              .form-group
+                label.col-lg-2.control-label for="password"  Password
+                .col-lg-10
+                  = f.input :password, required: false, label: false
+                  .checkbox
+                    = f.input :remember_me, as: :boolean
+              .form-group
+                .col-lg-10.col-lg-offset-2
+                  = f.button :submit, 'Sign in', class: 'btn-primary'
