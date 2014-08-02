@@ -1,1 +1,18 @@
-Here is your tasks
+h1 List of tasks
+table.table
+  thead
+    tr
+      th= Task.human_attribute_name(:name)
+      th= Task.human_attribute_name(:description)
+      th Actions
+  tbody
+    - @tasks.each do |task|
+      tr
+        td= link_to task.name, task_path(task)
+        td= task.description
+        td
+          = link_to "Edit", edit_task_path(task)
+          |  |
+          = link_to "Delete", task_path(task), method: :delete, data: { confirm: 'sure?' }
+
+= link_to 'New', new_task_path, class: 'btn'

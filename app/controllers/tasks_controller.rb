@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = current_user.tasks.new(params.require(:task).permit(:name))
+    @task = current_user.tasks.new(params.require(:task).permit(:name, :description))
     if @task.save
       redirect_to tasks_path
     else
@@ -27,7 +27,7 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find( params[:id] )
-    if @task.update(params.require(:task).permit(:name))
+    if @task.update(params.require(:task).permit(:name, :description))
       redirect_to tasks_path
     else
       render :edit
