@@ -1,4 +1,10 @@
-h1 Task
-b= @task.name
-p= @task.description
-= link_to "All tasks", tasks_path
+.container.main
+  .row
+    .col-md-3
+      = render('navigation')
+
+    .col-md-9
+      h1 task.name
+      hr.colorgraph
+      p task.description
+      = link_to "All tasks", tasks_path

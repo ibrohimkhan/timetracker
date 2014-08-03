@@ -1,0 +1,23 @@
+/* auth */
+.auth{
+  padding-top: 7%;
+
+  h1{
+    font-size: 36px;
+    color: #555;
+    margin: 0 0 6px 0;
+
+    small{color: #888;}
+  }
+
+  form{
+    -webkit-animation: crum-btt .8s 1 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    -moz-animation:    crum-btt .8s 1 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    -o-animation:      crum-btt .8s 1 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    animation:         crum-btt .8s 1 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  }
+
+  .user_remember_me{
+    padding-left: 20px;
+  }
+}

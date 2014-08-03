@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
 
+  layout 'dashboard'
+
   def index
     @tasks = current_user.tasks.paginate(:page => params[:page], :per_page => 3)
   end
@@ -47,4 +49,13 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
+
+  private
+    def navigation
+
+    end
+
+    def counts
+
+    end
 end

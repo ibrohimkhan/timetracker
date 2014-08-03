@@ -1,27 +1,20 @@
-.auth.auth-signin
-  .container
-    .row
-      .col-md-6
-        h1 Timetraker
-        p about project
-      .col-md-6
-        .well.bs-component
-          = simple_form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'form-horizontal' }) do |f|
-            fieldset
-              legend Sign in
-              .form-group
-                label.col-lg-2.control-label for="email"  Email
-                .col-lg-10
-                  = f.input :email, :input_class => 'form-control', required: true, autofocus: true, label: false
-              .form-group
-                label.col-lg-2.control-label for="password"  Password
-                .col-lg-10
-                  = f.input :password, required: false, label: false
-                  .checkbox
-                    = f.input :remember_me, as: :boolean
-              .form-group
-                .col-lg-10.col-lg-offset-2
-                  p
-                    = f.button :submit, 'Sign in', class: 'btn-primary'
-                  h5
-                    = link_to 'Registration', new_user_registration_path
+div.auth.container
+  div.row
+    div.col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'animated' }) do |f|
+        h1  Login
+        hr.colorgraph
+
+        div.form-group
+          = f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email Address', input_html: { class: 'form-control' }
+
+        div.form-group
+          = f.input :password, required: false, label: false, placeholder: 'Password', input_html: { class: 'form-control' }
+
+        div.row
+          div.col-md-6
+            = f.input :remember_me, as: :boolean, inline_label: 'Remember me', label: false
+          div.col-md-6
+            = f.button :submit, 'Login', class: 'btn-primary btn-block'
+      hr
+      = link_to 'Registration', new_user_registration_path

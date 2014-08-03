@@ -1,4 +1,19 @@
-= simple_form_for @task do |f|
-  = f.input :name
-  = f.input :description
-  = f.submit
+.container.main
+  .row
+    .col-md-3
+      = render('navigation')
+
+    .col-md-9
+      h1 My tasks
+      hr.colorgraph
+
+      .row
+        = render('counts')
+
+      .actions
+        = link_to 'Create new task', new_task_path, class: 'btn btn-default'
+
+      = simple_form_for @task do |f|
+        = f.input :name
+        = f.input :description
+        = f.submit
