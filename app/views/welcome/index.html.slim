@@ -2,9 +2,10 @@ div#welcome
   /! Header
   section#header.dark
     header
-      h1 Welcome to Timetraker
+      h1 Welcome to Timetracker
       - if user_signed_in?
-        p Hello my dear user
+        p 
+          ' Hello #{current_user.first_name} #{current_user.last_name}
       - else
         p
           ' A free very beautiful task manager

@@ -11,9 +11,17 @@
             fieldset
               legend Registration
               .form-group
+                label.col-lg-2.control-label for="first_name" Name
+                .col-lg-10
+                  = f.input :first_name, :input_class => 'form-control', required: true, autofocus: true, label: false
+              .form-group
+                label.col-lg-2.control-label for="last_name" Surname
+                .col-lg-10
+                  = f.input :last_name, :input_class => 'form-control', required: true, label: false
+              .form-group
                 label.col-lg-2.control-label for="email"  Email
                 .col-lg-10
-                  = f.input :email, :input_class => 'form-control', required: true, autofocus: true, label: false
+                  = f.input :email, :input_class => 'form-control', required: true, label: false
               .form-group
                 label.col-lg-2.control-label for="password"  Password
                 .col-lg-10
@@ -24,4 +32,7 @@
                   = f.input :password_confirmation, required: true, label: false
               .form-group
                 .col-lg-10.col-lg-offset-2
-                  = f.button :submit, 'Registration', class: 'btn-primary'
+                  p
+                    = f.button :submit, 'Registration', class: 'btn-primary'
+                  h5
+                    = link_to 'Sign in', new_user_session_path

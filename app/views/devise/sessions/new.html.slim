@@ -21,4 +21,7 @@
                     = f.input :remember_me, as: :boolean
               .form-group
                 .col-lg-10.col-lg-offset-2
-                  = f.button :submit, 'Sign in', class: 'btn-primary'
+                  p
+                    = f.button :submit, 'Sign in', class: 'btn-primary'
+                  h5
+                    = link_to 'Registration', new_user_registration_path
