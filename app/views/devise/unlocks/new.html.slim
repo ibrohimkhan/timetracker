@@ -4,4 +4,5 @@ h2 Resend unlock instructions
   = f.full_error :unlock_token
   .form-inputs
     = f.input :email, required: true, autofocus: true
-  = f.button :submit, "Resend unlock instructions"
+  .form-actions
+    = f.button :submit, "Resend unlock instructions"
