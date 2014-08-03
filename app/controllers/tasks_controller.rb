@@ -40,7 +40,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task = current_user.tasks.find( params[:id] )
-    @assignment = Assignment.where( task: @task, user: current_user ).take
+    @assignment = Assignment.find_by( task: @task, user: current_user )
 
     @assignment.destroy
     @task.destroy
