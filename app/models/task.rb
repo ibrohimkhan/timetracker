@@ -18,5 +18,5 @@ class Task < ActiveRecord::Base
   has_many :labels, through: :tags
 
   has_many :attachments
-  has_one :schedule
+  has_one  :schedule
 end
