@@ -17,6 +17,22 @@
 #                          PUT    /users(.:format)               devise/registrations#update
 #                          DELETE /users(.:format)               devise/registrations#destroy
 #                     root GET    /                              welcome#index
+#                    tasks GET    /tasks(.:format)               tasks#index
+#                          POST   /tasks(.:format)               tasks#create
+#                 new_task GET    /tasks/new(.:format)           tasks#new
+#                edit_task GET    /tasks/:id/edit(.:format)      tasks#edit
+#                     task GET    /tasks/:id(.:format)           tasks#show
+#                          PATCH  /tasks/:id(.:format)           tasks#update
+#                          PUT    /tasks/:id(.:format)           tasks#update
+#                          DELETE /tasks/:id(.:format)           tasks#destroy
+#                   labels GET    /labels(.:format)              labels#index
+#                          POST   /labels(.:format)              labels#create
+#                new_label GET    /labels/new(.:format)          labels#new
+#               edit_label GET    /labels/:id/edit(.:format)     labels#edit
+#                    label GET    /labels/:id(.:format)          labels#show
+#                          PATCH  /labels/:id(.:format)          labels#update
+#                          PUT    /labels/:id(.:format)          labels#update
+#                          DELETE /labels/:id(.:format)          labels#destroy
 #
 
 Rails.application.routes.draw do
@@ -29,6 +45,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   resources :tasks
+  resources :labels
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
