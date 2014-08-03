@@ -19,6 +19,18 @@ describe LabelsController do
       sign_in user
     end
 
+    describe "GET #index" do
+      it "render :index view" do
+        get :index
+        expect(response).to render_template :index
+      end
+
+      it "assigns the requested label to subject" do
+        get :index
+        expect(assigns(:labels)).to eq([subject])
+      end
+    end
+
     describe "GET #show" do
       it "renders the :show view" do
         get :show, id: subject
@@ -31,23 +43,15 @@ describe LabelsController do
        end 
     end
 
-    describe "GET #index" do
-      it "render :index view" do
-        get :index
-        expect(response).to render_template :index
-      end
-
-      it "assigns the requested task to subject" do
-        get :index
-        expect(:labels).to eq([subject])
-      end
-    end
-
-
     describe "GET #new" do
       it "renders the :new view" do
         get :new
         expect(response).to render_template :new
+      end
+
+      it "assigns the requested label to new label" do
+        get :new
+        expect(assigns(:label)).to be_new_record
       end
     end
 
@@ -56,10 +60,20 @@ describe LabelsController do
         it "creates new object" do
           expect{post :create, label: FactoryGirl.attributes_for(:label)}.to change(Label, :count).by(1)
         end
+
+        it "redirects to index path" do
+          post :create, label: FactoryGirl.attributes_for(:label)
+          expect(response).to redirect_to labels_path
+        end
       end
     end
 
     describe "GET #edit" do
+      it "assigns the requested label to subject" do
+        get :edit, id: subject
+        expect(assigns(:label)).to eq(subject)
+      end
+
       it "renders the :edit view" do
         get :edit, id: subject
         expect(response).to render_template :edit
@@ -80,16 +94,17 @@ describe LabelsController do
     end
 
     describe "DELETE #destroy" do
+      before(:each) { @label = FactoryGirl.create :label }
+
       it "deletes the label" do
-        expect{ delete :destroy, id: subject }.to change(Label, :count).by(-1)
+        expect{ delete :destroy, id: @label }.to change(Label, :count).by(-1)
       end
 
       it "redirects to labels#index" do
-        delete :destroy, id: subject
+        delete :destroy, id: @label
         expect(response).to redirect_to labels_path
       end
     end
 
   end
-
 end
