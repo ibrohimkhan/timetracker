@@ -12,10 +12,14 @@ describe TasksController do
 
   context "when user logged in" do
     let(:user) { FactoryGirl.create(:user) }
+    let(:assignment) { FactoryGirl.create(:assignment) }
     subject { FactoryGirl.create(:task) }
 
     before do
       sign_in user
+      assignment.task = subject
+      assignment.user = user
+      assignment.save
     end
 
     describe "GET #index" do
@@ -26,7 +30,7 @@ describe TasksController do
 
       it "assigns the requested task to subject" do
         get :index
-        expect(assigns(:tasks)).to eq([subject])
+        expect(user.tasks).to include(subject)
       end
     end
 
@@ -93,14 +97,12 @@ describe TasksController do
     end
 
     describe "DELETE #destroy" do
-      before(:each) { @task = FactoryGirl.create :task }
-
       it "deletes the task" do
-        expect{ delete :destroy, id: @task }.to change(Task, :count).by(-1)
+        expect{ delete :destroy, id: subject }.to change(Task, :count).by(-1)
       end
 
       it "redirects to tasks#index" do
-        delete :destroy, id: @task
+        delete :destroy, id: subject
         expect(response).to redirect_to tasks_path
       end
     end
