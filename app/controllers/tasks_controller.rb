@@ -3,7 +3,8 @@ class TasksController < ApplicationController
   layout 'dashboard'
 
   def index
-    @tasks = current_user.tasks.paginate(:page => params[:page], :per_page => 3)
+    @tasks = current_user.tasks.page(params[:page]).per_page(3)
+    @tasks = @tasks.search(params[:search]) if params[:search]
   end
 
   def show
