@@ -1,11 +1,12 @@
 class LabelsController < ApplicationController
 
+  before_filter :find_label, :only => [:show, :edit, :update, :destroy]
+
 	def index
 		@labels = Label.all
 	end
 
 	def show
-    @label = Label.find( params[:id] )
 	end
 
 	def new
@@ -22,11 +23,9 @@ class LabelsController < ApplicationController
 	end
 
 	def edit
-    @label = Label.find( params[:id] )
 	end
 
 	def update
-    @label = Label.find( params[:id] )
     if @label.update(params.require(:label).permit(:name))
       redirect_to labels_path
     else
@@ -35,9 +34,13 @@ class LabelsController < ApplicationController
 	end
 
 	def destroy
-    @label = Label.find( params[:id] )
 		@label.destroy
 		redirect_to labels_path
 	end
+
+  private
+  def find_label
+    @label = Label.find(params[:id])
+  end
 
 end
