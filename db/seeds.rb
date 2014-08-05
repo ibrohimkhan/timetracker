@@ -8,12 +8,14 @@
 
 
 unless User.any?
+
   5.times do |i|
 	  User.create([{
 	  	first_name: "FirstName#{i}",
 	  	last_name:  "LastName#{i}",
-	  	email:      "email#{i}@mail.com",
-	  	password:   "pass"
+	  	email:      "test#{i}@test.ru",
+	  	password:   "test1234"
 	  }])
-	end
+  end
+
 end
