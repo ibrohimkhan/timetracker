@@ -26,12 +26,10 @@
                 label.col-lg-2.control-label for="password_confirmation"  Password confirmation
                 .col-lg-10
                   = f.input :password_confirmation, required: false, label: false;
-              .form-group
-                label.col-lg-2.control-label for="current_password"  Current password
-                .col-lg-10
-                  = f.input :current_password, hint: "we need your current password to confirm your changes", required: true, label: false;
-              .form-group
-
+            .form-group
+              label.col-lg-2.control-label for="current_password"  Current password
+              .col-lg-10
+                = f.input :current_password, hint: "we need your current password to confirm your changes", required: true, label: false;
               .form-group
                 .col-lg-10.col-lg-offset-2
                   = f.button :submit, 'Send me reset password instructions', class: 'btn-danger'

@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
 
   layout 'dashboard'
+  before_filter :find_user_tasks, :only => [:show, :edit, :update, :destroy]
 
   def index
     @tasks = current_user.tasks.page(params[:page]).per_page(3)
@@ -8,7 +9,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = current_user.tasks.find( params[:id] )
   end
 
   def new
@@ -29,11 +29,9 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = current_user.tasks.find( params[:id] )
   end
 
   def update
-    @task = current_user.tasks.find( params[:id] )
     if @task.update(params.require(:task).permit(:name, :description))
       redirect_to tasks_path
     else
@@ -42,12 +40,16 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = current_user.tasks.find( params[:id] )
     @assignment = Assignment.find_by( task: @task, user: current_user )
 
     @assignment.destroy
     @task.destroy
     redirect_to tasks_path
+  end
+
+  private
+  def find_user_tasks
+    @task = current_user.tasks.find(params[:id])
   end
 
 end
