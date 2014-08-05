@@ -1,0 +1,61 @@
+@font-face{
+    font-family:'FontAwesome';
+    src: url(asset_path('fontawesome-webfont.eot?v=4.0.1'));
+    src: url(asset_path('fontawesome-webfont.eot?#iefix&v=4.0.1')) format('embedded-opentype'),
+         url(asset_path('fontawesome-webfont.woff?v=4.0.1')) format('woff'),
+         url(asset_path('fontawesome-webfont.ttf?v=4.0.1')) format('truetype'),
+         url(asset_path('fontawesome-webfont.svg?v=4.0.1#fontawesomeregular')) format('svg');
+    font-weight:normal;
+    font-style:normal;
+}
+
+/*********************************************************************************/
+/* Basic                                                                         */
+/*********************************************************************************/
+html {
+  height: 100%;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background: #F8F8F8;
+  height: 100%;
+}
+.colorgraph {
+  height: 5px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+
+.l{outline: 1px solid red}
+
+/* navbar */
+.navbar-header{
+
+  .logo{
+
+    img{margin-top: 12px}
+  }
+}
+
+/* main */
+.main{
+  padding-top: 80px;
+  background: #fff;
+  min-height: 100%;
+
+  h1{
+    margin: 0;
+    font-size: 24px;
+  }
+
+  hr.colorgraph{
+    height: 2px;
+    margin: 6px 0 15px 0;
+  }
+}

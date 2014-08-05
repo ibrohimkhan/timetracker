@@ -4,4 +4,5 @@ h2 Resend confirmation instructions
   = f.full_error :confirmation_token
   .form-inputs
     = f.input :email, required: true, autofocus: true
-  = f.button :submit, "Resend confirmation instructions"
+  .form-actions
+    = f.button :submit, "Resend confirmation instructions"

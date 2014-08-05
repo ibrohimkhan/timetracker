@@ -1,0 +1,106 @@
+
+/* tasks */
+table.tasks.animated{
+  -webkit-animation: crum-btt .8s 1 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  -moz-animation:    crum-btt .8s 1 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  -o-animation:      crum-btt .8s 1 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  animation:         crum-btt .8s 1 cubic-bezier(0.175, 0.885, 0.320, 1.275);
+}
+table.tasks tr > td{
+  vertical-align: middle;
+  padding: 6px 4px;
+
+}
+table.tasks tr > td:before {
+  -webkit-transition: color .2s ease-in-out;
+  -moz-transition: color .2s ease-in-out;
+  -o-transition: color .2s ease-in-out;
+  transition: color .2s ease-in-out;
+}
+table.tasks tr > td:first-child{
+  padding-left: 10px;
+}
+table.tasks tr > td:last-child{
+  padding-right: 10px;
+}
+table.tasks tr > td.delete{
+  width: 60px;
+}
+table.tasks tr > td.edit{
+  width: 60px;
+}
+table.tasks tr > td.status{
+  width: 70px;
+  text-transform: uppercase;
+  text-align: right;
+}
+table.tasks tr > td.status.status-new{
+  color: #62c2e4;
+}
+table.tasks tr > td.status.status-doing{
+  color: #c49cde;
+}
+table.tasks tr > td.status.status-done{
+  color: #c4e17f;
+}
+table.tasks tr > td.status.status-deadline{
+  color: #fecf71;
+}
+table.tasks tr > td.status.status-expired{
+  color: #f0776c ;
+}
+
+
+/* task-status-info */
+.task-status-info{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.task-status-info .item{
+  text-align: center;
+  border: 1px solid #E6E9ED;
+  border-radius: 6px;
+  padding: 6px 0;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.task-status-info .item:before {
+  -webkit-transition: color .2s ease-in-out;
+  -moz-transition: color .2s ease-in-out;
+  -o-transition: color .2s ease-in-out;
+  transition: color .2s ease-in-out;
+}
+.task-status-info .item span{
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+}
+.task-status-info .item-expired{
+  border-color: #f0776c;
+  color: #f0776c;
+}
+.task-status-info .item-deadline{
+  border-color: #fecf71;
+  color: #fecf71;
+}
+.task-status-info .item-done{
+  border-color: #c4e17f;
+  color: #c4e17f;
+}
+.task-status-info .item-doing{
+  border-color: #c49cde;
+  color: #c49cde;
+}
+.task-status-info .item-new{
+  border-color: #62c2e4;
+  color: #62c2e4;
+}
+.task-status-info .item-total{
+  border-color: #2c3e50;
+  color: #fff;
+  background: #2c3e50;
+}
+
+.actions{
+  margin-bottom: 20px;
+}

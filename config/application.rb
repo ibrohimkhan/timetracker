@@ -17,6 +17,8 @@ module Timetracker
     # config.time_zone = 'Central Time (US & Canada)'
     SimpleForm.browser_validations = false
 
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
     config.generators do |g|
       g.test_framework :rspec,
                        :view_spec => false,

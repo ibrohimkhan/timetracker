@@ -1,7 +1,20 @@
-h2 Sign in
-= simple_form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'form-horizontal' }) do |f|
-  .form-inputs
-    = f.input :email, required: false, autofocus: true
-    = f.input :password, required: false
-    = f.input :remember_me, as: :boolean
-  = f.button :submit, "Sign in"
+div.auth.container
+  div.row
+    div.col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => 'animated' }) do |f|
+        h1  Login
+        hr.colorgraph
+
+        div.form-group
+          = f.input :email, required: true, autofocus: true, label: false, placeholder: 'Email Address', input_html: { class: 'form-control' }
+
+        div.form-group
+          = f.input :password, required: false, label: false, placeholder: 'Password', input_html: { class: 'form-control' }
+
+        div.row
+          div.col-md-6
+            = f.input :remember_me, as: :boolean, inline_label: 'Remember me', label: false
+          div.col-md-6
+            = f.button :submit, 'Login', class: 'btn-primary btn-block'
+      hr
+      = link_to 'Registration', new_user_registration_path

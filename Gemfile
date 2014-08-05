@@ -78,3 +78,9 @@ gem 'slim-rails'
 
 # Devise localized view
 gem 'devise-i18n-views'
+
+# Paginate
+gem 'will_paginate'
+
+# Bootstraped paginate
+gem 'will_paginate-bootstrap'

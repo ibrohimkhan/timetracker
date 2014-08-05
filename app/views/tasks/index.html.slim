@@ -1,0 +1,32 @@
+.container.main
+  .row
+    .col-md-3
+      = render('navigation')
+
+    .col-md-9
+      h1 My tasks
+      hr.colorgraph
+      = form_tag(tasks_path, :method => "get", id: "search-form") do
+        p
+         = text_field_tag :search, params[:search], placeholder: "Search Tasks", class: 'form-control'
+        p
+          = submit_tag "Search", :name => nil, class: 'btn btn-primary btn-small'
+
+      .row
+        = render('counts')
+
+      .actions
+        = link_to 'Create new task', new_task_path, class: 'btn btn-default'
+
+      table.table.animated.table-striped.table-responsive.tasks
+        tbody
+          - @tasks.each do |task|
+            tr
+              td= link_to task.name, task_path(task)
+              td.status
+              td.edit
+                = link_to "Edit", edit_task_path(task), class: 'btn btn-default btn-xs btn-block'
+              td.delete
+                = link_to "Delete", task_path(task), method: :delete, data: { confirm: 'sure?' }, class: 'btn btn-danger btn-xs btn-block'
+
+      = will_paginate @tasks, renderer: BootstrapPagination::Rails

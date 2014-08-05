@@ -1,6 +1,19 @@
-h2 Forgot your password?
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :email, required: true, autofocus: true
-  = f.button :submit, "Send me reset password instructions"
+.auth.auth-forgot-pass
+  .container
+    .row
+      .col-md-6
+        h1 Timetraker
+        p about project
+      .col-md-6
+        .well.bs-component
+          = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+            = f.error_notification
+            fieldset
+              legend Forgot your password?
+              .form-group
+                label.col-lg-2.control-label for="email"  Email
+                .col-lg-10
+                  = f.input :email, :input_class => 'form-control', required: true, autofocus: true, label: false
+              .form-group
+                .col-lg-10.col-lg-offset-2
+                  = f.button :submit, 'Send me reset password instructions', class: 'btn-danger'

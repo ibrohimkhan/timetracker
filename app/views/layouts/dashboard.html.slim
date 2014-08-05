@@ -20,4 +20,23 @@ html lang="en"
     = javascript_include_tag "application"
 
   body
+
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          = link_to 'Timetracker', '/', class: 'navbar-brand'
+
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          </button>
+        .navbar-collapse.collapse#navbar-main
+          ul.nav.navbar-nav.navbar-right
+            li
+              = link_to 'Setting', ''
+            li
+              = link_to 'Logout', ''
+
+
     == yield
