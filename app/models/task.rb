@@ -20,8 +20,6 @@ class Task < ActiveRecord::Base
   has_many :attachments
   has_one  :schedule
 
-  def self.search(query)
-	  where("name like ?", "%#{query}%")
-	end
+  scope :find_tasks, ->(query) { where('name like ?', "%#{query}%") }
 
 end
