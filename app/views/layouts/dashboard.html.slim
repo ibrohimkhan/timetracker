@@ -34,9 +34,9 @@ html lang="en"
         .navbar-collapse.collapse#navbar-main
           ul.nav.navbar-nav.navbar-right
             li
-              = link_to 'Setting', ''
+              = link_to 'Settings', edit_user_registration_path
             li
-              = link_to 'Logout', ''
+              = link_to 'Logout', destroy_user_session_path, :method => :delete
 
 
     == yield

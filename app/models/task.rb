@@ -20,14 +20,8 @@ class Task < ActiveRecord::Base
   has_many :attachments
   has_one  :schedule
 
-  #def self.search(query)
-	  #where("name like ?", "%#{query}%") 
-	#end
-
-	def self.search(search)
-    res = includes(:assignments).order('name')
-    res = res.where('name LIKE ?', "%#{search}%") if search
-    res
-  end
+  def self.search(query)
+	  where("name like ?", "%#{query}%")
+	end
 
 end

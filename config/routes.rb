@@ -25,14 +25,6 @@
 #                          PATCH  /tasks/:id(.:format)           tasks#update
 #                          PUT    /tasks/:id(.:format)           tasks#update
 #                          DELETE /tasks/:id(.:format)           tasks#destroy
-#                   labels GET    /labels(.:format)              labels#index
-#                          POST   /labels(.:format)              labels#create
-#                new_label GET    /labels/new(.:format)          labels#new
-#               edit_label GET    /labels/:id/edit(.:format)     labels#edit
-#                    label GET    /labels/:id(.:format)          labels#show
-#                          PATCH  /labels/:id(.:format)          labels#update
-#                          PUT    /labels/:id(.:format)          labels#update
-#                          DELETE /labels/:id(.:format)          labels#destroy
 #
 
 Rails.application.routes.draw do
