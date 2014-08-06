@@ -21,4 +21,16 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   has_many :assignments
   has_many :tasks, through: :assignments
+
+  validates :first_name, :last_name, :email, :password, presence: true
+  validates :first_name, :last_name, length: { minimum: 5 }
+  validates :password, length: { minimum: 5 }
+  validates :password, confirmation: true
+  validates :password_confirmation, presence: true
+  validates :email, uniqueness: true
+  validates :email, format: { with: /.+@.+\..+/i,
+    message: "only allows letters" }
+  validates :first_name, :last_name, format: { with: /\A[a-zA-Z]+\z/,
+    message: "only allows letters" }
+
 end

@@ -24,4 +24,10 @@ class Task < ActiveRecord::Base
 	  where("name like ?", "%#{query}%")
 	end
 
+	validates :name, :description, presence: true
+	validates :name, :description, length: { minimum: 5 }
+	validates :name, uniqueness: true
+	validates :name, format: { with: /\A[a-zA-Z]+\z/,
+    message: "only allows letters" }
+
 end
