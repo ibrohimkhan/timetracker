@@ -37,6 +37,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   resources :tasks
+  resources :labels
+
+  match 'tasks/set_labels' => "tasks#set_labels", via: [:post]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
