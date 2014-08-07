@@ -22,7 +22,7 @@ class TasksController < ApplicationController
     @assignment.task = @task
 
     name = Rails.cache.read("label")
-    if name.include?('/*/')
+    if !name.nil? && name.include?('/*/')
       name.split('/*/').each do |label_name|
         @tag = Tag.new
         @tag.task = @task
@@ -33,7 +33,7 @@ class TasksController < ApplicationController
       @tag = Tag.new
       @tag.task = @task
       @tag.label = Label.find_by_name(name)
-      @tag.save
+      @tag.save unless @tag.label.nil?
     end
 
     if @task.save && @assignment.save
