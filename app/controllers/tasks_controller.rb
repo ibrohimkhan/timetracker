@@ -5,7 +5,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = current_user.tasks.page(params[:page]).per_page(3)
-    @tasks = @tasks.search(params[:search]) if params[:search]
+    @tasks = @tasks.find_tasks(params[:search]) if params[:search]
   end
 
   def show
