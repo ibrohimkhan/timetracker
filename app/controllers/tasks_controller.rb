@@ -21,7 +21,8 @@ class TasksController < ApplicationController
     @assignment.user = current_user
     @assignment.task = @task
 
-    name = flash[:task]
+    name = Rails.cache.read("label")
+
     label_name = Label.find_by_name(name)
     @tag = Tag.new
     @tag.task = @task
@@ -72,9 +73,12 @@ class TasksController < ApplicationController
 
     #@tag.label = Label.find_by_name(labels[:name])
     #@tag.save
-    lbl = labels[:name]
-    flash[:task] = params[:lbl]
-    render text: labels
+    #lbl = labels[:name]
+    #flash[:task] = params[:lbl]
+
+    Rails.cache.write("label", labels[:name])
+
+    #render text: labels
   end
 
   private
