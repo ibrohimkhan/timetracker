@@ -20,8 +20,12 @@ class Task < ActiveRecord::Base
   has_many :attachments
   has_one  :schedule
 
+  validates :name, :description, presence: true
+  validates :name, :description, length: { minimum: 4 }
+  validates :name, uniqueness: true
+
   def self.search(query)
-	  where("name like ?", "%#{query}%")
-	end
+    where("name like ?", "%#{query}%")
+  end
 
 end

@@ -22,13 +22,21 @@ class TasksController < ApplicationController
     @assignment.task = @task
 
     name = Rails.cache.read("label")
+    if name.include?('/*/')
+      name.split('/*/').each do |label_name|
+        @tag = Tag.new
+        @tag.task = @task
+        @tag.label = Label.find_by_name(label_name)
+        @tag.save
+      end
+    else
+      @tag = Tag.new
+      @tag.task = @task
+      @tag.label = Label.find_by_name(name)
+      @tag.save
+    end
 
-    label_name = Label.find_by_name(name)
-    @tag = Tag.new
-    @tag.task = @task
-    @tag.label = label_name
-
-    if @task.save && @assignment.save && @tag.save
+    if @task.save && @assignment.save
       redirect_to tasks_path
     else
       render :new
@@ -48,37 +56,15 @@ class TasksController < ApplicationController
 
   def destroy
     @assignment = Assignment.find_by( task: @task, user: current_user )
-
     @assignment.destroy
     @task.destroy
+
     redirect_to tasks_path
   end
 
   def set_labels
-    #@tag = Tag.new
-    #@tag.task = flash[:task]
-
     labels = params[:label]
-
-=begin
-    if !labels.nil? && labels.include?('/*/')
-      labels.split('/*/').each do |label_name|
-        label = Label.find_by_name(label_name)
-        @tag.label = label
-      end
-    else
-      @tag.label = Label.find_by_name(labels)
-    end
-=end
-
-    #@tag.label = Label.find_by_name(labels[:name])
-    #@tag.save
-    #lbl = labels[:name]
-    #flash[:task] = params[:lbl]
-
     Rails.cache.write("label", labels[:name])
-
-    #render text: labels
   end
 
   private
