@@ -7,4 +7,10 @@
       h1 =@task.name
       hr.colorgraph
       p =@task.description
+
+      p Labels:
+      - @task.labels.each do |label|
+        span =label.name + ' '
+
+      p
       = link_to 'All tasks', tasks_path

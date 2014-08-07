@@ -57,6 +57,7 @@ class TasksController < ApplicationController
   def destroy
     @assignment = Assignment.find_by( task: @task, user: current_user )
     @assignment.destroy
+    @task.labels.delete_all
     @task.destroy
 
     redirect_to tasks_path
