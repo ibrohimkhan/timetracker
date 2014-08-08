@@ -19,6 +19,8 @@ Spork.prefork do
 
     config.include Devise::TestHelpers, :type => :controller
 
+    config.include JsonSpec::Helpers
+
     config.use_transactional_fixtures = false
 
     config.infer_base_class_for_anonymous_controllers = false

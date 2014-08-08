@@ -84,3 +84,6 @@ gem 'will_paginate'
 
 # Bootstraped paginate
 gem 'will_paginate-bootstrap'
+
+# Easily handle JSON in RSpec and Cucumber
+gem 'json_spec'
