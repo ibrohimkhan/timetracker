@@ -21,45 +21,25 @@ class TasksController < ApplicationController
     @assignment.user = current_user
     @assignment.task = @task
 
-    name = Rails.cache.read("label")
-    if !name.nil? && name.include?('/*/')
-      name.split('/*/').each do |label_name|
-        @tag = Tag.new
-        @tag.task = @task
-        @tag.label = Label.find_by_name(label_name)
-        @tag.save
-      end
-    else
-      @tag = Tag.new
-      @tag.task = @task
-      @tag.label = Label.find_by_name(name)
-      @tag.save unless @tag.label.nil?
-    end
+    label_name = Rails.cache.read("label")
+    save(@task, label_name) unless label_name.nil?
 
-    if @task.save && @assignment.save
-      redirect_to tasks_path
-    else
-      render :new
-    end
+    return redirect_to tasks_path if (@task.save && @assignment.save)
+    render :new
   end
 
   def edit
   end
 
   def update
-    if @task.update(params.require(:task).permit(:name, :description))
-      redirect_to tasks_path
-    else
-      render :edit
-    end
+    return redirect_to tasks_path if @task.update(params.require(:task).permit(:name, :description))
+    render :edit
   end
 
   def destroy
-    @assignment = Assignment.find_by( task: @task, user: current_user )
+    @assignment = Assignment.find_by(task: @task, user: current_user)
     @assignment.destroy
-    @task.labels.delete_all
     @task.destroy
-
     redirect_to tasks_path
   end
 
@@ -71,6 +51,15 @@ class TasksController < ApplicationController
   private
   def find_user_tasks
     @task = current_user.tasks.find(params[:id])
+  end
+
+  def save(task, label_name)
+    label_name.split('/*/').each do |name|
+      @tag = Tag.new
+      @tag.task = task
+      @tag.label = Label.find_by_name(name)
+      @tag.save
+    end
   end
 
 end
