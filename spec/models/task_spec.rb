@@ -11,7 +11,7 @@
 #  updated_at  :datetime
 #
 
-require 'spec_helper'
+require_relative '../spec_helper'
 
 describe Task do
   it "has a valid factory" do
@@ -26,4 +26,11 @@ describe Task do
 
   it { is_expected.to have_many(:attachments) }
   it { is_expected.to have_one(:schedule) }
+
+	it { is_expected.to validate_presence_of(:name) }
+	it { is_expected.to validate_presence_of(:description) }
+	it { is_expected.to ensure_length_of(:name).is_at_least(5) }
+	it { is_expected.to ensure_length_of(:description).is_at_least(10) }
+	it { is_expected.to validate_uniqueness_of(:name) }
+
 end

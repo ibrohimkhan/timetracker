@@ -15,6 +15,7 @@
 #
 
 class User < ActiveRecord::Base
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -22,11 +23,10 @@ class User < ActiveRecord::Base
   has_many :assignments
   has_many :tasks, through: :assignments
 
-  validates :first_name, :last_name, :email, :password, presence: true
+  validates :first_name, :last_name, :email, :password, :password_confirmation, presence: true
   validates :first_name, :last_name, length: { minimum: 2 }
   validates :password, length: { minimum: 5 }
   validates :password, confirmation: true
-  validates :password_confirmation, presence: true
   validates :email, uniqueness: true
   validates :email, format: { with: /.+@.+\..+/i,
     message: "only allows letters" }

@@ -22,10 +22,11 @@
 
       br
       = simple_form_for @task do |f|
-        .form-group.has-error.help-block
+        = f.error_notification
+        .form-group.help-block
           = f.input :name, required: true, label: false, placeholder: 'Title task', input_html: { class: 'form-control' }
         br
-        .form-group.has-error.help-block
+        .form-group.help-block
           = f.input :description, required: true, label: false, placeholder: 'Description task', input_html: { class: 'form-control' }
         br
         .form-group

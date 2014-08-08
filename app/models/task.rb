@@ -12,6 +12,7 @@
 #
 
 class Task < ActiveRecord::Base
+
   has_many :assignments
   has_many :users, through: :assignments
   has_many :tags
@@ -19,6 +20,11 @@ class Task < ActiveRecord::Base
 
   has_many :attachments
   has_one  :schedule
+
+  validates :name, :description, presence: true
+  validates :name, length: { minimum: 5 }
+  validates :description, length: { minimum: 10 }
+  validates :name, uniqueness: true
 
   scope :find_tasks, ->(query) { where('name like ?', "%#{query}%") }
 

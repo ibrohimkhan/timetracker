@@ -14,7 +14,7 @@
 #  remember_created_at    :datetime
 #
 
-require 'spec_helper'
+require_relative "../spec_helper"
 
 describe User do
   it "has a valid factory" do
@@ -23,5 +23,16 @@ describe User do
 
   it { is_expected.to have_many(:assignments) }
   it { is_expected.to have_many(:tasks).through(:assignments) }
+
+  it { is_expected.to validate_presence_of(:first_name) }
+  it { is_expected.to validate_presence_of(:last_name) }
+  it { is_expected.to validate_presence_of(:email) }
+  it { is_expected.to validate_presence_of(:password) }
+  it { is_expected.to validate_presence_of(:password_confirmation) }
+  it { is_expected.to ensure_length_of(:first_name).is_at_least(2) }
+  it { is_expected.to ensure_length_of(:last_name).is_at_least(2) }
+  it { is_expected.to validate_uniqueness_of(:email) }
+  it { is_expected.to allow_value('/.+@.+\..+/i').for(:email )}
+
 end
 
