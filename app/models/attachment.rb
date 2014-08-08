@@ -14,4 +14,7 @@ require 'carrierwave/orm/activerecord'
 class Attachment < ActiveRecord::Base
   belongs_to :task
   mount_uploader :file_path, FileUploader
+
+  validates_associated :task
+  validates_presence_of :task_id
 end

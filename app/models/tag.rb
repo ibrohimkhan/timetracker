@@ -12,4 +12,7 @@
 class Tag < ActiveRecord::Base
   belongs_to :task
   belongs_to :label
+
+  validates_associated :task
+  validates_associated :label
 end

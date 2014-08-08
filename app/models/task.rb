@@ -21,10 +21,13 @@ class Task < ActiveRecord::Base
   has_many :attachments
   has_one  :schedule
 
+  validates_associated :assignments
   validates :name, :description, presence: true
   validates :name, length: { minimum: 5 }
   validates :description, length: { minimum: 10 }
   validates :name, uniqueness: true
+  validates :parent_id, numericality: { only_integer: true }
+  validates_inclusion_of :state, :in => [true, false]
 
   scope :find_tasks, ->(query) { where('name like ?', "%#{query}%") }
 

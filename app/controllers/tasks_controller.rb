@@ -24,7 +24,7 @@ class TasksController < ApplicationController
     label_name = Rails.cache.read("label")
     save(@task, label_name) unless label_name.nil?
 
-    return redirect_to tasks_path if (@task.save && @assignment.save)
+    return redirect_to tasks_path if @task.save && @assignment.save
     render :new
   end
 

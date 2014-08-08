@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :assignments
   has_many :tasks, through: :assignments
 
+  validates_associated :assignments
   validates :first_name, :last_name, :email, :password, :password_confirmation, presence: true
   validates :first_name, :last_name, length: { minimum: 2 }
   validates :password, length: { minimum: 5 }
