@@ -4,8 +4,9 @@ class TasksController < ApplicationController
   before_filter :find_user_tasks, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = current_user.tasks.page(params[:page]).per_page(3)
-    @tasks = @tasks.find_tasks(params[:search]) if params[:search]
+    current = current_user.tasks
+    @tasks = current.parent_task.page(params[:page]).per_page(3)
+    @tasks = current.find_tasks(params[:search]).page(params[:page]).per_page(3) if params[:search]
   end
 
   def show

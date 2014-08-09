@@ -17,7 +17,8 @@
       = link_to 'Go to tasks', tasks_path, class: "btn btn-danger btn-xs"
       input type="button" value="Create subtask" onclick="createSubTask()" class="btn btn-danger btn-xs"
 
-      p= Task.children(@task.id)
+      - Task.children(@task.id).each do |child|
+          p= child
 
       br
       div id="container"
