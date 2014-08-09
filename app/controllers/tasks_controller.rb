@@ -43,9 +43,24 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
-  def set_labels
+  def save_labels
     labels = params[:label]
     Rails.cache.write("label", labels[:name])
+  end
+
+  def save_by_task_id
+    labels = params[:label]
+    task = current_user.tasks.find(labels[:id])
+    save(task, labels[:name])
+  end
+
+  def delete_label
+    labels = params[:label]
+    task = current_user.tasks.find((labels[:id]).to_i)
+    label_id = task.labels.where("name = ?", labels[:name]).ids
+
+    tag_id = Tag.where("task_id = ? and label_id = ?", task.id, label_id).ids
+    Tag.destroy(tag_id)
   end
 
   private

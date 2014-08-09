@@ -10,10 +10,140 @@
       .row
         = render('counts')
 
-      .actions
-        = link_to 'Create new task', new_task_path, class: 'btn btn-default'
+      div id="labels"
+        h4 Edit labels of your task
+        input type="text" id="tag"
+        input type="button" value="add label" onclick="getLabels()" class="btn btn-default btn-xs"
+        br
+        div
+          table.table.animated.table-striped.table-responsive.tasks
+            tbody id="list_of_labels"
+              - @task.labels.each do |label|
+                <tr id="#{@task.id}" data-label="old"><td>#{label.name}</td><td><input type="button" value="Remove it" class="btn btn-danger btn-xs"/></td></tr>
 
       = simple_form_for @task do |f|
         = f.input :name
         = f.input :description
-        = f.submit
+        = f.submit onclick: "sendLabels()", class: 'btn btn-primary'
+
+      br
+        = link_to 'Back to task list', tasks_path
+
+javascript:
+  window.labels_list = [];
+
+  function sendLabels() {
+    var rows = document.getElementById('list_of_labels').childNodes;
+    if (rows === undefined || rows == null) return false;
+
+    var id = rows[0].getAttribute('id');
+    var items = [];
+
+    for (var i = 0; i < rows.length; i++) {
+      var row_attr = rows[i].dataset.label;
+      if (row_attr == "new") {
+        var item = rows[i].textContent;
+        if (item !== undefined) items.push(item);
+      }
+    }
+
+    var labels = items.join('/*/');
+
+    $.ajax({
+      type: 'POST',
+      url: '/tasks/save_by_task_id',
+      data: $.param({label: {name: labels, id: id}}),
+    });
+  }
+
+  function getLabels() {
+    var tag_elem = document.getElementById('tag');
+    var label_name = tag_elem.value;
+    if (!label_name) {
+      alert("There is no label is given to add");
+      return false;
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/labels/',
+      data: $.param({label: {name: label_name}}),
+      success: function(data) {
+        var obj = null;
+        if (data instanceof Array) {
+          obj = data[0];
+        } else {
+          obj = data
+        }
+        addLabelToView(obj.name);
+        tag_elem.value = "";
+      }
+    });
+  }
+
+  function addLabelToView(label_name) {
+    if (!validate_label_name(label_name)) return false;
+
+    var labels_elem = document.getElementById('list_of_labels');
+    var tr = document.createElement("tr");
+    tr.setAttribute("id","#{@task.id}");
+    tr.setAttribute("data-label","new");
+
+    var btn = document.createElement("input");
+    btn.type = 'button';
+    btn.className = 'btn btn-danger btn-xs';
+    btn.value = 'Remove it';
+
+    var td_label_name = document.createElement("td");
+    td_label_name.appendChild(document.createTextNode(label_name));
+
+    var td_label_control = document.createElement("td");
+    td_label_control.appendChild(btn);
+
+    tr.appendChild(td_label_name);
+    tr.appendChild(td_label_control);
+    labels_elem.appendChild(tr);
+  }
+
+  function removeLabelFromList() {
+    var target = event.target;
+    var tr = target.parentElement.parentElement;
+    var item = tr.children[0].innerHTML;
+    var item_state = tr.dataset.label;
+
+    var index = labels_list.indexOf(item);
+    labels_list.splice(index, 1);
+
+    var tbody = document.getElementById('list_of_labels');
+    tbody.removeChild(tr);
+
+    if (item_state == "new") return false;
+
+    $.ajax({
+      type: 'POST',
+      url: '/tasks/delete_label',
+      data: $.param( {label: {name: item, id: tr.id}} ),
+    });
+  }
+
+  function validate_label_name(label_name) {
+    var size = labels_list.indexOf(label_name);
+    if (size == -1 && labels_list.length < 6) {
+      labels_list.push(label_name);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  $(function() {
+    var label_container = document.getElementById('list_of_labels');
+    var labels = label_container.children;
+    for (var i = 0; i < labels.length; i++) {
+      var name = labels[i].textContent;
+      if (name === undefined && name == null) return false;
+      labels_list.push(name);
+    }
+
+    label_container.addEventListener('click', removeLabelFromList, false);
+  });

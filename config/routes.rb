@@ -39,7 +39,9 @@ Rails.application.routes.draw do
   resources :tasks
   resources :labels
 
-  match 'tasks/set_labels' => "tasks#set_labels", via: [:post]
+  match 'tasks/save_labels' => "tasks#save_labels", via: [:post]
+  match 'tasks/save_by_task_id' => "tasks#save_by_task_id", via: [:post]
+  match 'tasks/delete_label' => "tasks#delete_label", via: [:post]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

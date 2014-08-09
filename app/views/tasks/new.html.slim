@@ -46,7 +46,7 @@ javascript:
 
     $.ajax({
       type: 'POST',
-      url: '/tasks/set_labels',
+      url: '/tasks/save_labels',
       data: $.param({label: {name: labels}}),
     });
   }
@@ -83,7 +83,7 @@ javascript:
 
     var btn = document.createElement("input");
     btn.type = 'button';
-    btn.className = 'btn btn-danger btn-xs btn-block';
+    btn.className = 'btn btn-danger btn-xs';
     btn.value = 'Remove it';
 
     var td_label_name = document.createElement("td");
