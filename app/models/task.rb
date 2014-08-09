@@ -30,5 +30,10 @@ class Task < ActiveRecord::Base
   validates_inclusion_of :state, :in => [true, false]
 
   scope :find_tasks, ->(query) { where('name like ?', "%#{query}%") }
+  scope :children, ->(id) { find_by('parent_id = ?', id) }
+
+  def to_s
+    "#{id}, #{name}, #{description}"
+  end
 
 end

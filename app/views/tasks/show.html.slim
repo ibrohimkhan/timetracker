@@ -10,7 +10,129 @@
 
       p Labels:
       - @task.labels.each do |label|
-        span =label.name + ' '
+        span =label.name + ' / '
 
       p
-      = link_to 'All tasks', tasks_path
+        br
+      = link_to 'Go to tasks', tasks_path, class: "btn btn-danger btn-xs"
+      input type="button" value="Create subtask" onclick="createSubTask()" class="btn btn-danger btn-xs"
+
+      p= Task.children(@task.id)
+
+      br
+      div id="container"
+        div id="labels"
+          h4 Add Labels to your subtask
+          input type="text" id="tag"
+          input type="button" value="add label" onclick="getLabels()"
+          br
+          div
+            table.table.animated.table-striped.table-responsive.tasks
+              tbody id="list_of_labels"
+
+        br
+        = simple_form_for Task.new do |f|
+          = f.error_notification
+          .form-group.sr-only
+            = f.input :parent_id, input_html: { value: @task.id, type: 'hidden' }
+          .form-group.help-block
+            = f.input :name, required: true, label: false, placeholder: 'Title task', input_html: { class: 'form-control' }
+          br
+          .form-group.help-block
+            = f.input :description, required: true, label: false, placeholder: 'Description task', input_html: { class: 'form-control' }
+          br
+          .form-group
+            = f.button :submit, id: 'createTask', onclick: "sendLabels()", class: 'btn btn-primary'
+
+javascript:
+  $(function() {
+    $('#container').hide();
+
+    var label_buttons = document.getElementById('list_of_labels');
+    label_buttons.addEventListener('click', removeLabelFromList, false);
+  });
+
+  function createSubTask() {
+    $('#container').toggle();
+    //alert("#{@task.id}");
+  }
+
+  window.labels_list = [];
+
+  function sendLabels() {
+    var labels = labels_list.join('/*/');
+
+    $.ajax({
+      type: 'POST',
+      url: '/tasks/save_labels',
+      data: $.param({label: {name: labels}}),
+    });
+  }
+
+  function getLabels() {
+    var tag_elem = document.getElementById('tag');
+    var label_name = tag_elem.value;
+    if (!label_name) {
+      alert("There is no label is given to add");
+      return false;
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/labels/',
+      data: $.param({label: {name: label_name}}),
+      success: function(data) {
+        var obj = null;
+        if (data instanceof Array) {
+          obj = data[0];
+        } else {
+          obj = data
+        }
+        addLabelToView(obj.name);
+        tag_elem.value = "";
+      }
+    });
+  }
+
+  function addLabelToView(label_name) {
+    if (!validate_label_name(label_name) && labels_list.length > 6) return false;
+    var labels_elem = document.getElementById('list_of_labels');
+    var tr = document.createElement("tr");
+
+    var btn = document.createElement("input");
+    btn.type = 'button';
+    btn.className = 'btn btn-danger btn-xs';
+    btn.value = 'Remove it';
+
+    var td_label_name = document.createElement("td");
+    td_label_name.appendChild(document.createTextNode(label_name));
+
+    var td_label_control = document.createElement("td");
+    td_label_control.appendChild(btn);
+
+    tr.appendChild(td_label_name);
+    tr.appendChild(td_label_control);
+    labels_elem.appendChild(tr);
+  }
+
+  function removeLabelFromList() {
+    var target = event.target;
+    var tr = target.parentElement.parentElement;
+    var item = tr.children[0].innerHTML;
+
+    var index = labels_list.indexOf(item);
+    labels_list.splice(index, 1);
+
+    var tbody = document.getElementById('list_of_labels');
+    tbody.removeChild(tr);
+  }
+
+  function validate_label_name(label_name) {
+    var size = labels_list.indexOf(label_name);
+    if (size == -1) {
+      labels_list.push(label_name);
+      return true;
+    } else {
+      return false;
+    }
+  }

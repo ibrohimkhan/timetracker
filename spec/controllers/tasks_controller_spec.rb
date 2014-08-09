@@ -64,9 +64,9 @@ describe TasksController do
           expect{post :create, task: FactoryGirl.attributes_for(:task)}.to change(Task, :count).by(1)
         end
 
-        it "redirects to index path" do
-          post :create, task: FactoryGirl.attributes_for(:task)
-          expect(response).to redirect_to tasks_path
+        it "render to :show view" do
+          get :show, id: subject
+          expect(response).to render_template :show
         end
       end
     end

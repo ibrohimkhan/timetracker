@@ -16,7 +16,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(params.require(:task).permit(:name, :description))
+    @task = Task.new(params.require(:task).permit(:name, :description, :parent_id))
     @assignment = Assignment.new
     @assignment.user = current_user
     @assignment.task = @task
@@ -24,7 +24,7 @@ class TasksController < ApplicationController
     label_name = Rails.cache.read("label")
     save(@task, label_name) unless label_name.nil?
 
-    return redirect_to tasks_path if @task.save && @assignment.save
+    return redirect_to task_path(@task) if @task.save && @assignment.save
     render :new
   end
 
