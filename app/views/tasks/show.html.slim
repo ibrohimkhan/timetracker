@@ -16,9 +16,23 @@
         br
       = link_to 'Go to tasks', tasks_path, class: "btn btn-danger btn-xs"
       input type="button" value="Create subtask" onclick="createSubTask()" class="btn btn-danger btn-xs"
+      - if @task.parent_id > 0
+        input type="button" value="Go to parent task" onclick="goToParentTask()" class="btn btn-danger btn-xs"
 
-      - Task.children(@task.id).each do |child|
-          p= child
+      div id="subtaskTable"
+        - if @children.size > 0
+          table.table.animated.table-striped.table-responsive.tasks
+            tbody
+              th name
+              th description
+              th date
+              th action
+              - @children.each do |child|
+                tr [id="#{child.id}"]
+                  td= child.name
+                  td= child.description
+                  td= child.created_at
+                  td= link_to 'Edit', edit_task_path(child), class: 'btn btn-default btn-xs btn-block'
 
       br
       div id="container"
@@ -51,11 +65,30 @@ javascript:
 
     var label_buttons = document.getElementById('list_of_labels');
     label_buttons.addEventListener('click', removeLabelFromList, false);
+
+    var children_table = document.getElementById('subtaskTable');
+    children_table.addEventListener('click', showChildTask, false);
   });
 
   function createSubTask() {
     $('#container').toggle();
-    //alert("#{@task.id}");
+    $('#subtaskTable').toggle();
+
+    if (event.target.value != "List of Subtasks")
+      event.target.value = "Go to subtasks";
+    else
+      event.target.value = "Create subtask";
+  }
+
+  function showChildTask() {
+    var target = event.target;
+    if (target.tagName != 'TD') return false;
+    var id = target.parentElement.getAttribute('id');
+    window.location.href = window.location.origin + '/tasks/' + id
+  }
+
+  function goToParentTask() {
+    window.location.href = window.location.origin + "/tasks/#{@task.parent_id}"
   }
 
   window.labels_list = [];

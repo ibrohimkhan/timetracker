@@ -10,6 +10,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    @children = current_user.tasks.where('parent_id = ?', params[:id])
   end
 
   def new
@@ -17,7 +18,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(params.require(:task).permit(:name, :description, :parent_id))
+    @task = Task.new(params.require(:task).permit(:name, :description))
     @assignment = Assignment.new
     @assignment.user = current_user
     @assignment.task = @task
@@ -46,6 +47,7 @@ class TasksController < ApplicationController
 
   def save_labels
     labels = params[:label]
+    Rails.cache.clear("label")
     Rails.cache.write("label", labels[:name])
   end
 
