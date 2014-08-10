@@ -41,6 +41,10 @@ group :development, :test do
   gem 'pry-remote'
   gem 'factory_girl_rails'
   gem 'faker'
+
+  # This will allow us to use our .env file by accessing
+  # the local variables before starting the application
+  gem 'foreman'
 end
 
 group :test do
