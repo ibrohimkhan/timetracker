@@ -34,7 +34,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    return redirect_to tasks_path if @task.update(params.require(:task).permit(:name, :description))
+    return redirect_to tasks_path if @task.update(params.require(:task).permit(:name, :description, :parent_id))
     render :edit
   end
 

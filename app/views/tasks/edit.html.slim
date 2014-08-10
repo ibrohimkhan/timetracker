@@ -21,10 +21,28 @@
               - @task.labels.each do |label|
                 <tr id="#{@task.id}" data-label="old"><td>#{label.name}</td><td><input type="button" value="Remove it" class="btn btn-danger btn-xs"/></td></tr>
 
-      = simple_form_for @task do |f|
-        = f.input :name
-        = f.input :description
-        = f.submit onclick: "sendLabels()", class: 'btn btn-primary'
+      table.table.table-striped
+        tbody
+          tr
+            td
+              = simple_form_for @task do |f|
+                .form-group
+                  = f.input :name
+                .form-group
+                  = f.input :description
+                .form-group.sr-only
+                  = f.input :parent_id, input_html: { type: 'hidden', id: 'parentid' }
+                .form-group
+                  = f.submit onclick: "sendLabels()", class: 'btn btn-primary'
+
+            td
+              div id="selectRootTask"
+                p Select task to change parent task:
+                ul [id="listOfParentTask"]
+                  - current_user.tasks.each do |task|
+                    - if task.parent_id != 0
+                        li [id="0"]= 'Root'
+                    li [id="#{task.id}"]= task.name
 
       br
         = link_to 'Back to task list', tasks_path
@@ -136,6 +154,20 @@ javascript:
     }
   }
 
+  var selectedItem = null;
+  function changeTaskParentId() {
+    var target = event.target;
+    if (target.tagName != 'LI') return false;
+
+    if (selectedItem != null) selectedItem.style.border = "";
+    target.style.border = "1px solid green";
+    selectedItem = target;
+    var task_id = target.getAttribute("id");
+
+    var task_parent_id = document.getElementById('parentid');
+    task_parent_id.value = task_id;
+  }
+
   $(function() {
     var label_container = document.getElementById('list_of_labels');
     var labels = label_container.children;
@@ -146,4 +178,7 @@ javascript:
     }
 
     label_container.addEventListener('click', removeLabelFromList, false);
+
+    var task_list = document.getElementById('listOfParentTask');
+    task_list.addEventListener('click', changeTaskParentId, false);
   });
