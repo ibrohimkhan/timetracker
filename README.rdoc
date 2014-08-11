@@ -1,29 +1,17 @@
 == EasyTask ==
 
-SCHEDULING 
+Task
+- Search task by name
+- Design tree structure for task
+- Create subtasks in any levels
+- Move task from one branch to another
 
-- Scheduling for each day 
-- Transferring and copying tasks
+Label
+- Assign labels to tasks
 
-TASK LISTS
-
-- Thematic grouping of tasks 
-- Binding to multiple lists
-- Assigning task priorities
-
-AUTOMATIC LISTS
-
-- Quick access to the planned, overdue, completed, future, long, and deleting tasks
-
-DIARY 
-
-- Record daily events 
-- Allocation successful days
-
-NOTES 
-
-- Memo pad 
-- List of selected notes
+Authentication
+- Manage User
+- Reset user password by Mail
 
 DEPLOYED
 
