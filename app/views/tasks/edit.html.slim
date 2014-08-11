@@ -39,9 +39,8 @@
               div id="selectRootTask"
                 p Select task to change parent task:
                 ul [id="listOfParentTask"]
+                  li [id="0"]= 'Root'
                   - current_user.tasks.each do |task|
-                    - if task.parent_id != 0
-                        li [id="0"]= 'Root'
                     li [id="#{task.id}"]= task.name
 
       br

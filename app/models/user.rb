@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
     message: "only allows letters" }
 
   def send_reset_password_instructions
-    self.reset_password!('qwerty123', 'qwerty123')
+    self.reset_password!('test1234', 'test1234')
     Notifier.reset_password_instructions(self).deliver
   end
 end

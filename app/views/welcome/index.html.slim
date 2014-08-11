@@ -16,7 +16,7 @@ div#welcome
       - if user_signed_in?
         = link_to 'sign out', destroy_user_session_path, :method => :delete
         '  |
-        = link_to 'settings', 'users/edit'
+        = link_to 'settings', edit_user_registration_path
         '  |
         = link_to 'tasks', tasks_path
       - else

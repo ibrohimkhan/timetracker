@@ -36,12 +36,15 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-  resources :tasks
   resources :labels
 
-  match 'tasks/save_labels' => "tasks#save_labels", via: [:post]
-  match 'tasks/save_by_task_id' => "tasks#save_by_task_id", via: [:post]
-  match 'tasks/delete_label' => "tasks#delete_label", via: [:post]
+  resources :tasks do
+    collection do
+      post 'save_labels'
+      post 'delete_label'
+      post 'save_by_task_id'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
