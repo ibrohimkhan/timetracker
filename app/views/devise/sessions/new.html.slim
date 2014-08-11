@@ -18,3 +18,5 @@ div.auth.container
             = f.button :submit, 'Login', class: 'btn-primary btn-block'
       hr
       = link_to 'Registration', new_user_registration_path
+      br
+      = link_to "Forgot your password?", new_password_path(resource_name)

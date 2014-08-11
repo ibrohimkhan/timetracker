@@ -1,5 +1,4 @@
 class Notifier < ActionMailer::Base
-  #include Devise::Mailers::Helpers
   default from: ENV['GMAIL_USERNAME']
 
   def reset_password_instructions(recipient)
