@@ -32,8 +32,8 @@ class User < ActiveRecord::Base
   validates :email, format: { with: /.+@.+\..+/i,
     message: "only allows letters" }
 
-  def send_reset_password_instructions
-    self.reset_password!('test1234', 'test1234')
+  def reset_password
+    self.send_reset_password_instructions
     Notifier.reset_password_instructions(self).deliver
   end
 end
