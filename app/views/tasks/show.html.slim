@@ -15,9 +15,9 @@
       p
         br
       = link_to 'Go to tasks', tasks_path, class: "btn btn-danger btn-xs"
-      input type="button" value="Create subtask" onclick="createSubTask()" class="btn btn-danger btn-xs"
+      input type="button" value="Create subtask" id="createSubTask" class="btn btn-danger btn-xs"
       - if @task.parent_id > 0
-        input type="button" value="Go to parent task" onclick="goToParentTask()" class="btn btn-danger btn-xs"
+        input type="button" value="Go to parent task" id="goToParentTask" class="btn btn-danger btn-xs"
 
       div id="subtaskTable"
         - if @children.size > 0
@@ -39,7 +39,7 @@
         div id="labels"
           h4 Add Labels to your subtask
           input type="text" id="tag"
-          input type="button" value="add label" onclick="getLabels()"
+          input type="button" value="add label" id="addLabel"
           br
           div
             table.table.animated.table-striped.table-responsive.tasks
@@ -57,116 +57,40 @@
             = f.input :description, required: true, label: false, placeholder: 'Description task', input_html: { class: 'form-control' }
           br
           .form-group
-            = f.button :submit, id: 'createTask', onclick: "sendLabels()", class: 'btn btn-primary'
+            = f.button :submit, id: 'createTask', class: 'btn btn-primary'
 
 javascript:
-  $(function() {
     $('#container').hide();
+    $('#createSubTask').click(function(event) {
+        $('#container').toggle();
+        $('#subtaskTable').toggle();
 
-    var label_buttons = document.getElementById('list_of_labels');
-    label_buttons.addEventListener('click', removeLabelFromList, false);
-
-    var children_table = document.getElementById('subtaskTable');
-    children_table.addEventListener('click', showChildTask, false);
-  });
-
-  function createSubTask() {
-    $('#container').toggle();
-    $('#subtaskTable').toggle();
-
-    if (event.target.value != "List of Subtasks")
-      event.target.value = "Go to subtasks";
-    else
-      event.target.value = "Create subtask";
-  }
-
-  function showChildTask() {
-    var target = event.target;
-    if (target.tagName != 'TD') return false;
-    var id = target.parentElement.getAttribute('id');
-    window.location.href = window.location.origin + '/tasks/' + id
-  }
-
-  function goToParentTask() {
-    window.location.href = window.location.origin + "/tasks/#{@task.parent_id}"
-  }
-
-  window.labels_list = [];
-
-  function sendLabels() {
-    var labels = labels_list.join('/*/');
-
-    $.ajax({
-      type: 'POST',
-      url: '/tasks/save_labels',
-      data: $.param({label: {name: labels}}),
+        if (event.target.value != "List of Subtasks")
+            event.target.value = "Go to subtasks";
+        else
+            event.target.value = "Create subtask";
     });
-  }
 
-  function getLabels() {
-    var tag_elem = document.getElementById('tag');
-    var label_name = tag_elem.value;
-    if (!label_name) {
-      alert("There is no label is given to add");
-      return false;
-    }
+    $('#subtaskTable').click(function(event) {
+        var target = event.target;
+        if (target.tagName != 'TD') return false;
 
-    $.ajax({
-      type: 'POST',
-      url: '/labels/',
-      data: $.param({label: {name: label_name}}),
-      success: function(data) {
-        var obj = null;
-        if (data instanceof Array) {
-          obj = data[0];
-        } else {
-          obj = data
-        }
-        addLabelToView(obj.name);
-        tag_elem.value = "";
-      }
+        var id = target.parentElement.getAttribute('id');
+        window.location.href = window.location.origin + '/tasks/' + id;
     });
-  }
 
-  function addLabelToView(label_name) {
-    if (!validate_label_name(label_name) && labels_list.length > 6) return false;
-    var labels_elem = document.getElementById('list_of_labels');
-    var tr = document.createElement("tr");
+    var newLabel = new Label({
+        elem: document.getElementById('addLabel'),
+        list: document.getElementById('list_of_labels'),
+        tag: document.getElementById('tag'),
+        mode: 'new'
+    });
 
-    var btn = document.createElement("input");
-    btn.type = 'button';
-    btn.className = 'btn btn-danger btn-xs';
-    btn.value = 'Remove it';
+    $('#createTask').click(function() {
+        newLabel.createLabelAction.bind(newLabel);
+    });
 
-    var td_label_name = document.createElement("td");
-    td_label_name.appendChild(document.createTextNode(label_name));
+    $('#goToParentTask').click(function(event) {
+        window.location.href = window.location.origin + "/tasks/#{@task.parent_id}";
+    });
 
-    var td_label_control = document.createElement("td");
-    td_label_control.appendChild(btn);
-
-    tr.appendChild(td_label_name);
-    tr.appendChild(td_label_control);
-    labels_elem.appendChild(tr);
-  }
-
-  function removeLabelFromList() {
-    var target = event.target;
-    var tr = target.parentElement.parentElement;
-    var item = tr.children[0].innerHTML;
-
-    var index = labels_list.indexOf(item);
-    labels_list.splice(index, 1);
-
-    var tbody = document.getElementById('list_of_labels');
-    tbody.removeChild(tr);
-  }
-
-  function validate_label_name(label_name) {
-    var size = labels_list.indexOf(label_name);
-    if (size == -1) {
-      labels_list.push(label_name);
-      return true;
-    } else {
-      return false;
-    }
-  }
