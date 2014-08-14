@@ -5,7 +5,7 @@ class TasksController < ApplicationController
 
   def index
     current = current_user.tasks
-    @tasks = current.page(params[:page]).per_page(3)
+    @tasks = current.parent_task.page(params[:page]).per_page(3)
     @tasks = current.find_tasks(params[:search]).page(params[:page]).per_page(3) if params[:search]
   end
 
@@ -64,7 +64,6 @@ class TasksController < ApplicationController
 
     tag_id = Tag.where("task_id = ? and label_id = ?", task.id, label_id).ids
     Tag.destroy(tag_id)
-    binding.pry
     Task.children(@task.id).delete_all
   end
 

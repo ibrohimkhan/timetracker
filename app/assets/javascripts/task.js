@@ -211,7 +211,61 @@ Task.prototype._changeParentId = function(event) {
     parentTaskId.value = taskId;
 };
 
-$(function() {
-    //var label = document.getElementById('createTask');
-    //label.addEventListener('click', newLabel.createLabelAction.bind(newLabel), false);
-});
+function TaskUI(options) {
+    var container        = this._container = options.container;
+    var createTask       = this._createTask = options.createTask;
+    var subtaskTable     = this._subtaskTable = options.subtaskTable;
+    var createSubTask    = this._createSubTask = options.createSubTask;
+    var goToParentTask   = this._goToParentTask = options.goToParentTask;
+    var addLabel         = this._addLabel = options.addLabel;
+    var labels           = this._labels = options.labels;
+    var tag              = this._tag = options.tag;
+    this._id             = options.id;
+    this._newLabel       = null;
+
+    $(container).hide();
+
+    $(createTask).on('click', this._createTaskBtn.bind(this));
+    $(createSubTask).on('click', this._createSubTaskBtn.bind(this));
+    $(subtaskTable).on('click', this._subtaskTableBtn.bind(this));
+    $(goToParentTask).on('click', this._goToParentTaskBtn.bind(this));
+}
+
+TaskUI.prototype._createSubTaskBtn = function(event) {
+    $(this._container).toggle();
+    $(this._subtaskTable).toggle();
+
+    var isContainerVisible = $(this._container).is(':visible');
+    if (isContainerVisible) {
+        event.target.value = "Go to list subtasks";
+        this._newLabel = new Label({
+            elem: this._addLabel,
+            list: this._labels,
+            tag: this._tag,
+            mode: 'new'
+        });
+    } else {
+        event.target.value = "Create subtask";
+    }
+};
+
+TaskUI.prototype._subtaskTableBtn = function(event) {
+    var target = event.target;
+    if (target.tagName != 'TD' && target.tagName != 'A') return false;
+
+    if (target.tagName == 'A') {
+        var id = target.parentElement.parentElement.getAttribute('id');
+        window.location.href = window.location.origin + '/tasks/' + id + '/edit';
+    } else {
+        var id = target.parentElement.getAttribute('id');
+        window.location.href = window.location.origin + '/tasks/' + id;
+    }
+};
+
+TaskUI.prototype._goToParentTaskBtn = function(event) {
+    window.location.href = window.location.origin + "/tasks/" + this._id;
+};
+
+TaskUI.prototype._createTaskBtn = function(event) {
+    this._newLabel.createLabelAction.bind(this._newLabel);
+};

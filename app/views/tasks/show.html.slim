@@ -32,7 +32,7 @@
                   td= child.name
                   td= child.description
                   td= child.created_at
-                  td= link_to 'Edit', edit_task_path(child), class: 'btn btn-default btn-xs btn-block'
+                  td= link_to 'Edit', edit_task_path(child.id), class: 'btn btn-default btn-xs btn-block'
 
       br
       div id="container"
@@ -60,37 +60,16 @@
             = f.button :submit, id: 'createTask', class: 'btn btn-primary'
 
 javascript:
-    $('#container').hide();
-    $('#createSubTask').click(function(event) {
-        $('#container').toggle();
-        $('#subtaskTable').toggle();
-
-        if (event.target.value != "List of Subtasks")
-            event.target.value = "Go to subtasks";
-        else
-            event.target.value = "Create subtask";
+  $(function() {
+    new TaskUI({
+      container: $('#container'),
+      createTask: $('#createTask'),
+      createSubTask: $('#createSubTask'),
+      subtaskTable: $('#subtaskTable'),
+      goToParentTask: $('#goToParentTask'),
+      addLabel: document.getElementById('addLabel'),
+      labels : document.getElementById('list_of_labels'),
+      tag: document.getElementById('tag'),
+      id: #{@task.parent_id}
     });
-
-    $('#subtaskTable').click(function(event) {
-        var target = event.target;
-        if (target.tagName != 'TD') return false;
-
-        var id = target.parentElement.getAttribute('id');
-        window.location.href = window.location.origin + '/tasks/' + id;
-    });
-
-    var newLabel = new Label({
-        elem: document.getElementById('addLabel'),
-        list: document.getElementById('list_of_labels'),
-        tag: document.getElementById('tag'),
-        mode: 'new'
-    });
-
-    $('#createTask').click(function() {
-        newLabel.createLabelAction.bind(newLabel);
-    });
-
-    $('#goToParentTask').click(function(event) {
-        window.location.href = window.location.origin + "/tasks/#{@task.parent_id}";
-    });
-
+  });
